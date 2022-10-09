@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_put_unsigned_nbr.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeulliot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 15:39:14 by jeulliot          #+#    #+#             */
-/*   Updated: 2022/02/22 16:00:39 by jeulliot         ###   ########.fr       */
+/*   Created: 2022/03/01 16:34:41 by jeulliot          #+#    #+#             */
+/*   Updated: 2022/03/01 16:34:43 by jeulliot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
 
-static int	ft_checklen(int nb)
+#include "../ft_printf.h"
+
+static unsigned int	ft_checklen(unsigned int nb)
 {
-	int	len;
-	int	n;
+	unsigned int	len;
+	unsigned int	n;
 
 	len = 0;
 	n = nb;
@@ -31,10 +32,10 @@ static int	ft_checklen(int nb)
 	}
 }
 
-static int	ft_pow(int len)
+static unsigned int	ft_pow(unsigned int len)
 {
-	int	i;
-	int	p;
+	unsigned int	i;
+	unsigned int	p;
 
 	p = 1;
 	i = 1;
@@ -43,31 +44,20 @@ static int	ft_pow(int len)
 	return (p);
 }
 
-int	ft_putnbr_fd(int n, int fd, int count)
+int	ft_put_unsigned_nbr(unsigned int n, int fd, int count)
 {
-	int	len;
-	int	i;
-	int	p;
+	unsigned int	len;
+	unsigned int	i;
+	unsigned int	p;
 
 	i = 0;
-	if (n == -2147483648)
-	{
-		write (fd, "-2147483648", 11);
-		return (count + 11);
-	}
 	len = ft_checklen(n);
-	if (n < 0)
-	{
-		i ++;
-		len ++;
-		count = ft_putchar_fd('-', fd, count);
-		n = -n;
-	}
 	while (++ i < len)
 	{
 		p = ft_pow(len - i + 1);
 		count = ft_putchar_fd(n / p + '0', fd, count);
 		n = n - (p * (n / p));
 	}
-	return (ft_putchar_fd((n % 10) + '0', fd, count));
+	count = ft_putchar_fd((n % 10) + '0', fd, count);
+	return (count);
 }

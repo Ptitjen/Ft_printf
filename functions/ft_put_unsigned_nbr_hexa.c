@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
-static unsigned long long int	ft_power(unsigned long long int p)
+static int	ft_power(int p)
 {
-	unsigned long long int	i;
+	int	i;
 
 	i = 1;
 	while (p != 0)
@@ -25,7 +25,7 @@ static unsigned long long int	ft_power(unsigned long long int p)
 	return (i);
 }
 
-static int	ft_power_max(unsigned long long int nbr)
+static int	ft_power_max(unsigned int nbr)
 {
 	int	p;
 
@@ -38,15 +38,13 @@ static int	ft_power_max(unsigned long long int nbr)
 	return (p);
 }
 
-int	ft_pp(unsigned long long int nbr, char *base, int count)
+int	ft_put_uhexa(unsigned int nbr, char *base, int count)
 {
-	unsigned long long int	j;
-	unsigned long long int	d;
-	int						p;
+	int	j;
+	int	d;
+	int	p;
 
 	p = ft_power_max (nbr);
-	write (1, "0x", 2);
-	count = count + 2;
 	while (nbr >= 16)
 	{
 		d = ft_power (p);

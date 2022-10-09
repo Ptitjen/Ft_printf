@@ -10,9 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= ft_printf.c ft_putchar_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
-			ft_put_unsigned_nbr_hexa.c ft_put_unsigned_nbr.c \
-			ft_putnbr_point.c
+SRCS	= ft_printf.c functions/ft_putchar_fd.c \
+			functions/ft_putnbr_fd.c \
+			functions/ft_putstr_fd.c \
+			functions/ft_put_unsigned_nbr_hexa.c \
+			functions/ft_put_unsigned_nbr.c \
+			functions/ft_putnbr_point.c
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -39,3 +42,5 @@ fclean:	clean
 	${RM} $(NAME)
 
 re:	fclean all
+
+.PHONY: all clean fclean re
